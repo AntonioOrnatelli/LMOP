@@ -1,6 +1,7 @@
 from pulp import *
 import time
 
+from kite_problem import KiteProblem
 from utils import compute_weights, get_random_rotation
 
 
@@ -12,42 +13,24 @@ x_lb = -200
 epsilon = 0.1
 k = 0.1
 # Problem definition
-kite_problem = LpProblem("kite_problem", LpMaximize)
-x1 = LpVariable("x1", cat=LpInteger)
-x2 = LpVariable("x2", cat=LpInteger)
-# Constraints
-kite_problem += 2*x1 + x2 <= 120
-kite_problem += 2*x1 + 3*x2 <= 212.5
-kite_problem += 4*x1 + 3*x2 <= 270
-kite_problem += x1 + 2*x2 >= 60
-kite_problem += x1 >= x_lb
-kite_problem += x1 <= x_ub
-kite_problem += x2 >= x_lb
-kite_problem += x2 <= x_ub
-# Objective functions
-f = [8*x1 + 12*x2, 14*x1 + 10*x2, x1 + x2]
-
+kite_problem = KiteProblem((x_lb, x_ub), (x_lb, x_ub))
+kite_problem.build_problem()
 start_time = time.time()
-# Lists of cost functions upper and lower bounds
-lb = []
-ub = []
-lb.append(8 * x_lb + 12 * x_lb)
-ub.append(8 * x_ub + 12 * x_ub)
-lb.append(14 * x_lb + 10 * x_lb)
-ub.append(14 * x_ub + 10 * x_ub)
-lb.append(x_lb + x_lb)
-ub.append(x_ub + x_ub)
 # Compute weights
-weights, mip_gap = compute_weights(3, lb, ub, epsilon, k)
-# Add the equivalent single-objective function to the problem
-kite_problem += lpSum([weights[i] * (f[i] - lb[i]) for i in range(3)])
+weights, mip_gap = compute_weights(
+    len(kite_problem.objective_functions),
+    kite_problem.objective_function_lower_bounds,
+    kite_problem.objective_function_upper_bounds,
+    epsilon,
+    k,
+)
 print("Seconds to compute weights: ", time.time() - start_time)
-kite_problem.solve(CPLEX_PY(gapRel=mip_gap))
+kite_problem.solve_as_single_objective(weights, mip_gap)
 print("Total seconds to solve the problem: ", time.time() - start_time)
 
 print("MIP_GAP: ", mip_gap)
 print("Weights: ", [w for w in weights])
-print("Optimal values: ", (value(x1), value(x2)))
+print("Optimal values: ", kite_problem.variables_values)
 
 print("***** Problem 5: randomly rotated hypercube ****")
 # Number of objectives and variables upper bounds
