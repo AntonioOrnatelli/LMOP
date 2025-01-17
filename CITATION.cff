@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Ornatelli
+    given-names: Antonio
+    orcid: https://orcid.org/0000-0002-2346-7645
+title: "Lexicographic Multi-Objective Optimization"
+version: 1.0
+date-released: 2025-01-17
