@@ -5,6 +5,7 @@ from utils import get_random_rotation
 
 
 class RotatedHypercubeProblem(MOProblem):
+    """ Rotated hypercube problem class """
     PROBLEM_NAME = "rotated_hypercube_problem"
 
     def __init__(self, n: int, x_bounds: tuple[float, float]) -> None:
