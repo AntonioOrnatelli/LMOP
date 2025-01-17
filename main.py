@@ -30,7 +30,7 @@ print_results(kite_problem, weights, mip_gap, weights_time, total_time)
 
 
 # Problem 2: Randomly rotated hypercube in 200D and 200 objectives
-# Number of objectives and variables upper bounds
+# Number of variables and variables upper bounds
 n = 200
 ub = 100.2
 lb = -100.2

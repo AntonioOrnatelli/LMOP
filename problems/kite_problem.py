@@ -2,6 +2,7 @@ from problems.multi_objective_problem import MOProblem
 
 
 class KiteProblem(MOProblem):
+    """ Kite problem class """
     PROBLEM_NAME = "kite_problem"
 
     def __init__(self, n: int,  x_bounds: list[tuple[float, float]]) -> None:
