@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def compute_weights(n, lb, ub, epsilon, k) -> tuple:
     lambda_ = []
     lambda_.append(1 / (ub[0] - lb[0]))
@@ -16,3 +17,13 @@ def get_random_rotation(n) -> np.ndarray:
     Q, R = np.linalg.qr(T)
     return Q
 
+def print_results(problem, weights, mip_gap, weights_time, total_time):
+    print("Problem: ", problem.problem.name)
+
+    print("Single objective weights computation time: ", weights_time, "seconds")
+    print("Total time to solve the problem: ", total_time, "seconds")
+
+    print("MIP_GAP: ", mip_gap)
+    print("Weights: ", [w for w in weights])
+    print("Optimal values: ", problem.variables_values)
+    print("\n")
