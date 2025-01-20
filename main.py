@@ -35,7 +35,7 @@ n = 200
 ub = 100.2
 lb = -100.2
 # Weights computation parameters
-epsilon = 7
+epsilon = 7.0
 k = 1
 # Problem definition
 hypercube_problem = RotatedHypercubeProblem(n, (lb, ub))
