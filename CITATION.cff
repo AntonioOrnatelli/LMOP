@@ -8,7 +8,7 @@ authors:
     given-names: Andrea
   - family-names: Filaci
     given-names: Gianluca
-    orcid: 0000-0002-9453-7161
+    orcid: https://orcid.org/0000-0002-9453-7161
   - family-names: Ferro
     given-names: Leonardo
 title: "Numerical examples for Lexicographic Multi-Objective Optimization solution method"
