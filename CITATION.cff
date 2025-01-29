@@ -12,5 +12,6 @@ authors:
   - family-names: Ferro
     given-names: Leonardo
 title: "Numerical examples for Lexicographic Multi-Objective Optimization solution method"
+url: "https://github.com/AntonioOrnatelli/LMOP"
 version: 1.0
 date-released: 2025-01-17
